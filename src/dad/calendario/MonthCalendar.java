@@ -71,7 +71,7 @@ public class MonthCalendar extends GridPane {
 		
 	}
 
-	private void onModelChanged() {
+	public void onModelChanged() {
 		int first = DateUtils.firstDay(year.get(), month.get()) - 1;
 		int last = DateUtils.lastDay(year.get(), month.get());
 		for (int i = 0; i < first; i++) {
@@ -84,7 +84,7 @@ public class MonthCalendar extends GridPane {
 			daysLabel[i].setText("");
 		}
 		Date day = DateUtils.day(year.get(), month.get(), 1);
-		monthNameLabel.setText(FORMATTER.format(day));
+		monthNameLabel.setText(FORMATTER.format(day).toUpperCase());
 	}
 
 	public IntegerProperty monthProperty() {

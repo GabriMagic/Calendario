@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
-import dad.calendario.utils.DateUtils;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,23 +46,23 @@ public class CalendarioController {
 
 		int mes = 1;
 
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 4; j++) {
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 3; j++) {
 				MonthCalendar monthCalendar = new MonthCalendar(calendario.getAnio(), mes);
-				
+				mesesPanel.add(monthCalendar, j, i);
 				listaMeses.add(monthCalendar);
-				mesesPanel.add(monthCalendar, i, j);
+				monthCalendar.onModelChanged();
 				mes++;
 			}
 		}
-		bind();
 
+		
 	}
 
-	private void bind() {
-		for (MonthCalendar mesCalendar : listaMeses) 
+	public void bind() {
+		for (MonthCalendar mesCalendar : listaMeses)
 			mesCalendar.yearProperty().bind(calendario.anioProperty());
-		
+
 		Bindings.bindBidirectional(anisoLabel.textProperty(), calendario.anioProperty(), new NumberStringConverter());
 	}
 
