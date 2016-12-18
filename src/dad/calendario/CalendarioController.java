@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,12 +36,14 @@ public class CalendarioController {
 	@FXML
 	private Button anteriorButton;
 
-	private List<MonthCalendar> listaMeses;
+	private List<MonthCalendar> lista;
+	private ObservableList<MonthCalendar> listaMeses;
 
 	public CalendarioController(CalendarioApp app) {
 
 		calendario = new CalendarioModel();
-		listaMeses = new ArrayList<>();
+		lista = new ArrayList<>();
+		listaMeses = FXCollections.observableArrayList(lista);
 		FXMLloads();
 
 		calendario.setAnio(LocalDate.now().getYear());
@@ -56,13 +60,12 @@ public class CalendarioController {
 			}
 		}
 
-		
 	}
 
 	public void bind() {
-		for (MonthCalendar mesCalendar : listaMeses)
+		for (MonthCalendar mesCalendar : listaMeses) {
 			mesCalendar.yearProperty().bind(calendario.anioProperty());
-
+		}
 		Bindings.bindBidirectional(anisoLabel.textProperty(), calendario.anioProperty(), new NumberStringConverter());
 	}
 
