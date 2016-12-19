@@ -84,7 +84,7 @@ public class MonthCalendar extends GridPane {
 			daysLabel[i].setText("");
 		}
 		Date day = DateUtils.day(year.get(), month.get(), 1);
-		monthNameLabel.setText(FORMATTER.format(day).toUpperCase());
+		monthNameLabel.setText(FORMATTER.format(day));
 	}
 
 	public IntegerProperty monthProperty() {
